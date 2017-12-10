@@ -15,6 +15,7 @@ public class TankClient extends Frame{
     int x = 50,y = 50;
     //背后虚拟图片，用来解决双缓冲问题
     Image offScreenImage = null;
+    Tank myTank = new Tank(50,50);
 
     public void lauchFrame(){
         //设置位置
@@ -38,6 +39,7 @@ public class TankClient extends Frame{
         //启动重画线程
         new Thread(new PaintThread()).start();
     }
+
     public static void main (String[] args){
         TankClient tc = new TankClient();
         tc.lauchFrame();
@@ -45,15 +47,7 @@ public class TankClient extends Frame{
 
     @Override
     public void paint(Graphics g) {
-        //窗口重画时会自动调用paint方法
-        //获取前景色
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        //设置圆的位置及大小，fillOVal使用当前颜色填充外接指定矩形框的椭圆。
-        g.fillOval(x,y,30,30);
-        //设回
-        g.setColor(c);
-        y += 5;
+        myTank.draw(g);
     }
 
     @Override
@@ -92,10 +86,8 @@ public class TankClient extends Frame{
 
         @Override
         public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            if(key == KeyEvent.VK_RIGHT){
-
-            }
+            myTank.keyPressed(e);
         }
     }
+
 }
