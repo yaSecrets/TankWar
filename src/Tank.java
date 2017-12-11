@@ -13,6 +13,7 @@ public class Tank {
     public static final int YSPEED = 5;
     private int x,y;
     private boolean bL = false,bU = false,bR = false,bD = false;
+
     enum Direction {L,R,U,D,LU,LD,RU,RD,STOP};
 
     private Direction dir = Direction.STOP;
@@ -48,7 +49,7 @@ public class Tank {
         g.setColor(c);
         move();
     }
-
+    //键盘按下事件
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
         switch (key){
@@ -63,6 +64,25 @@ public class Tank {
                 break;
             case KeyEvent.VK_DOWN:
                 bD = true;
+                break;
+        }
+        locateDirection();
+    }
+    //键盘抬起事件
+    public void keyReleased(KeyEvent e){
+        int key = e.getKeyCode();
+        switch (key){
+            case KeyEvent.VK_LEFT:
+                bL = false;
+                break;
+            case KeyEvent.VK_UP:
+                bU = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                bR = false;
+                break;
+            case KeyEvent.VK_DOWN:
+                bD = false;
                 break;
         }
         locateDirection();
@@ -111,7 +131,9 @@ public class Tank {
         else if(bL && bU && !bR && !bD) dir = Direction.LU;
         else if(bL && !bU && !bR && bD) dir = Direction.LD;
         else if(!bL && bU && bR && !bD) dir = Direction.RU;
-        else if(bL && !bU && bR && bD) dir = Direction.RD;
+        else if(!bL && !bU && bR && bD) dir = Direction.RD;
         else if(!bL && !bU && !bR && !bD) dir = Direction.STOP;
     }
+
+
 }

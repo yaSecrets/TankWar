@@ -83,10 +83,15 @@ public class TankClient extends Frame{
 
     //实现键盘的监听
     private class keyMonitor extends KeyAdapter{
-
+        //键盘按下事件
         @Override
         public void keyPressed(KeyEvent e) {
             myTank.keyPressed(e);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            myTank.keyReleased(e);
         }
     }
 
