@@ -15,7 +15,10 @@ public class TankClient extends Frame{
     int x = 50,y = 50;
     //背后虚拟图片，用来解决双缓冲问题
     Image offScreenImage = null;
-    Tank myTank = new Tank(50,50);
+    //Tank实体类
+    Tank myTank = new Tank(50,50,this);
+    //子弹实体类
+    Missile m = null;
 
     public void lauchFrame(){
         //设置位置
@@ -48,6 +51,7 @@ public class TankClient extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
+        if(m != null) m.draw(g);
     }
 
     @Override
@@ -94,5 +98,4 @@ public class TankClient extends Frame{
             myTank.keyReleased(e);
         }
     }
-
 }

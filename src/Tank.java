@@ -11,9 +11,12 @@ import java.awt.event.KeyEvent;
 public class Tank {
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
+    public static final int WIDTH = 30;//tank宽度
+    public static final int HEIGHT = 30;//tank高度
     private int x,y;
     private boolean bL = false,bU = false,bR = false,bD = false;
 
+    TankClient tc;
     enum Direction {L,R,U,D,LU,LD,RU,RD,STOP};
 
     private Direction dir = Direction.STOP;
@@ -21,7 +24,10 @@ public class Tank {
         this.x = x;
         this.y = y;
     }
-
+    public Tank(int x,int y,TankClient tc){
+        this(x,y);
+        this.tc = tc;
+    }
     public int getX() {
         return x;
     }
@@ -44,7 +50,7 @@ public class Tank {
         Color c = g.getColor();
         g.setColor(Color.RED);
         //设置圆的位置及大小，fillOVal使用当前颜色填充外接指定矩形框的椭圆。
-        g.fillOval(x,y,30,30);
+        g.fillOval(x,y,WIDTH,HEIGHT);
         //设回
         g.setColor(c);
         move();
@@ -53,6 +59,9 @@ public class Tank {
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
         switch (key){
+            case KeyEvent.VK_CONTROL:
+                tc.m = fire();
+                break;
             case KeyEvent.VK_LEFT:
                 bL = true;
                 break;
@@ -135,5 +144,10 @@ public class Tank {
         else if(!bL && !bU && !bR && !bD) dir = Direction.STOP;
     }
 
-
+    public Missile fire(){
+        int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
+        int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
+        Missile m = new Missile(x,y,dir);
+        return m;
+    }
 }
