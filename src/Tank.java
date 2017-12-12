@@ -18,8 +18,10 @@ public class Tank {
 
     TankClient tc;
     enum Direction {L,R,U,D,LU,LD,RU,RD,STOP};
-
+    //坦克方向
     private Direction dir = Direction.STOP;
+    //炮筒方向
+    private Direction ptDir = Direction.D;
     public Tank(int x, int y) {
         this.x = x;
         this.y = y;
@@ -53,6 +55,33 @@ public class Tank {
         g.fillOval(x,y,WIDTH,HEIGHT);
         //设回
         g.setColor(c);
+        //画炮弹
+        switch (ptDir) {
+            case L:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT / 2);
+                break;
+            case R:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x+Tank.WIDTH,y+Tank.HEIGHT/2);
+                break;
+            case U:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x+Tank.WIDTH/2,y);
+                break;
+            case D:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x+Tank.WIDTH/2,y+Tank.HEIGHT);
+                break;
+            case LU:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x,y);
+                break;
+            case LD:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x,y+Tank.HEIGHT);
+                break;
+            case RU:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x+Tank.WIDTH,y);
+                break;
+            case RD:
+                g.drawLine(x+Tank.WIDTH/2,y+Tank.HEIGHT/2,x+Tank.WIDTH,y+Tank.HEIGHT);
+                break;
+        }
         move();
     }
     //键盘按下事件
@@ -130,6 +159,10 @@ public class Tank {
             case STOP:
                 break;
         }
+        //如果坦克不是停止的，则吧炮筒方向设为和坦克方向一致
+        if(this.dir != Direction.STOP){
+            this.ptDir = this.dir;
+        }
     }
     //定位方向
     void locateDirection(){
@@ -147,7 +180,7 @@ public class Tank {
     public Missile fire(){
         int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
-        Missile m = new Missile(x,y,dir);
+        Missile m = new Missile(x,y,ptDir);
         return m;
     }
 }
