@@ -8,15 +8,23 @@ public class Missile {
     public static final int YSPEED = 10;
     public static final int WIDTH = 10;//子弹宽度
     public static final int HEIGHT = 10;//子弹高度
+    //子弹的位置
     int x,y;
     Tank.Direction dir;
 
+    //子弹是否存在
+    private boolean live = true;
+    //持有client引用
+    private TankClient tc;
     public Missile(int x, int y, Tank.Direction dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
     }
-
+    public Missile(int x,int y,Tank.Direction dir,TankClient tc){
+        this(x,y,dir);
+        this.tc = tc;
+    }
     public int getX() {
         return x;
     }
@@ -41,6 +49,9 @@ public class Missile {
         this.dir = dir;
     }
 
+    public void setLive(boolean live) {
+        this.live = live;
+    }
     public void draw(Graphics g){
         Color c = g.getColor();
         g.setColor(Color.BLACK);
@@ -82,5 +93,11 @@ public class Missile {
             case STOP:
                 break;
         }
+        if(x<0||y<0||x>TankClient.GAME_WIDTH||y>TankClient.GMME_HEIGHT){
+            tc.missiles.remove(this);
+        }
+    }
+    public boolean isLive(){
+        return live;
     }
 }

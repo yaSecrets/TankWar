@@ -3,6 +3,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.*;
 
 /**
  * Created by midng on 2017/12/10.
@@ -16,9 +17,27 @@ public class TankClient extends Frame{
     //背后虚拟图片，用来解决双缓冲问题
     Image offScreenImage = null;
     //Tank实体类
-    Tank myTank = new Tank(50,50,this);
+    Tank myTank = new Tank(50,50,true,this);
+    Tank enemyTank = new Tank(100,100,false,this);
     //子弹实体类
-    Missile m = null;
+    /* Missile m = null;*/
+    java.util.List<Missile> missiles = new ArrayList<>();
+
+    @Override
+    public void paint(Graphics g) {
+        //画字符串
+        g.drawString("missile count:" + missiles.size(),10,50);
+        /*if(m != null) m.draw(g);*/
+        //画子弹
+        for (int i = 0;i < missiles.size();i++){
+            Missile m = missiles.get(i);
+            /*if(!m.isLive()) missiles.remove(m);*/
+            m.draw(g);
+        }
+        //画坦克
+        myTank.draw(g);
+        enemyTank.draw(g);
+    }
 
     public void lauchFrame(){
         //设置位置
@@ -43,16 +62,6 @@ public class TankClient extends Frame{
         new Thread(new PaintThread()).start();
     }
 
-    public static void main (String[] args){
-        TankClient tc = new TankClient();
-        tc.lauchFrame();
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        myTank.draw(g);
-        if(m != null) m.draw(g);
-    }
 
     @Override
     public void update(Graphics g) {
@@ -97,5 +106,10 @@ public class TankClient extends Frame{
         public void keyReleased(KeyEvent e) {
             myTank.keyReleased(e);
         }
+    }
+
+    public static void main (String[] args){
+        TankClient tc = new TankClient();
+        tc.lauchFrame();
     }
 }
