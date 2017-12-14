@@ -24,6 +24,16 @@ public class Tank {
     private Direction ptDir = Direction.D;
     //区分tank好坏
     private boolean good;
+    //定义坦克的生存状态
+    private boolean live = true;
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
     public Tank(int x, int y,boolean good) {
         this.x = x;
         this.y = y;
@@ -50,6 +60,7 @@ public class Tank {
     }
 
     public void draw(Graphics g){
+        if(!live) return;
         //窗口重画时会自动调用paint方法
         //获取前景色
         Color c = g.getColor();
@@ -193,5 +204,8 @@ public class Tank {
         Missile m = new Missile(x,y,ptDir,this.tc);
         tc.missiles.add(m);
         return m;
+    }
+    public Rectangle getRect(){
+        return new Rectangle(x,y,WIDTH,HEIGHT);
     }
 }
