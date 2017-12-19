@@ -109,10 +109,13 @@ public class Missile {
     public Rectangle getRect(){
         return new Rectangle(x,y,WIDTH,HEIGHT);
     }
+    //打中一辆坦克
     public boolean hitTank(Tank t){
         if(this.getRect().intersects(t.getRect()) && t.isLive()){
             t.setLive(false);
             this.live = false;
+            Explode  e = new Explode(x,y,tc);
+            tc.explodes.add(e);
             return true;
         }
         return false;

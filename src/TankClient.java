@@ -3,7 +3,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by midng on 2017/12/10.
@@ -19,14 +20,17 @@ public class TankClient extends Frame{
     //Tank实体类
     Tank myTank = new Tank(50,50,true,this);
     Tank enemyTank = new Tank(100,100,false,this);
+    //爆照集合
+    List<Explode> explodes = new ArrayList<>();
     //子弹实体类
     /* Missile m = null;*/
-    java.util.List<Missile> missiles = new ArrayList<>();
+    List<Missile> missiles = new ArrayList<>();
 
     @Override
     public void paint(Graphics g) {
         //画字符串
         g.drawString("missile count:" + missiles.size(),10,50);
+        g.drawString("explode count:" + explodes.size(),10,70);
         /*if(m != null) m.draw(g);*/
         //画子弹
         for (int i = 0;i < missiles.size();i++){
@@ -34,6 +38,11 @@ public class TankClient extends Frame{
             /*if(!m.isLive()) missiles.remove(m);*/
             m.hitTank(enemyTank);
             m.draw(g);
+        }
+        // 画爆照效果
+        for (int i = 0;i < explodes.size();i++){
+            Explode e = explodes.get(i);
+            e.draw(g);
         }
         //画坦克
         myTank.draw(g);
