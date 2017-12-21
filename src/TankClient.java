@@ -19,24 +19,26 @@ public class TankClient extends Frame{
     Image offScreenImage = null;
     //Tank实体类
     Tank myTank = new Tank(50,50,true,this);
-    Tank enemyTank = new Tank(100,100,false,this);
+    /*Tank enemyTank = new Tank(100,100,false,this);*/
     //爆照集合
     List<Explode> explodes = new ArrayList<>();
     //子弹实体类
     /* Missile m = null;*/
     List<Missile> missiles = new ArrayList<>();
-
+    List<Tank> tanks = new ArrayList<>();
     @Override
     public void paint(Graphics g) {
         //画字符串
         g.drawString("missile count:" + missiles.size(),10,50);
         g.drawString("explode count:" + explodes.size(),10,70);
+        g.drawString("tanks count:" + tanks.size(),10,90);
         /*if(m != null) m.draw(g);*/
         //画子弹
         for (int i = 0;i < missiles.size();i++){
             Missile m = missiles.get(i);
             /*if(!m.isLive()) missiles.remove(m);*/
-            m.hitTank(enemyTank);
+            /*m.hitTank(enemyTank);*/
+            m.hitTanks(tanks);
             m.draw(g);
         }
         // 画爆照效果
@@ -45,11 +47,18 @@ public class TankClient extends Frame{
             e.draw(g);
         }
         //画坦克
+        for (int i = 0;i < tanks.size();i++){
+            Tank t = tanks.get(i);
+            t.draw(g);
+        }
         myTank.draw(g);
-        enemyTank.draw(g);
+        /*enemyTank.draw(g);*/
     }
 
     public void lauchFrame(){
+        for (int i = 0;i < 10;i++){
+            tanks.add(new Tank(50+40*(i+1),50,false,this));
+        }
         //设置位置
         this.setLocation(200,100);
         //设置窗口大小

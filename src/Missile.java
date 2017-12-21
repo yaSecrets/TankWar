@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by mding on 2017/12/11.
@@ -119,5 +120,14 @@ public class Missile {
             return true;
         }
         return false;
+    }
+
+    public  boolean hitTanks(List<Tank> tanks){
+        for (int i = 0;i<tanks.size();i++){
+            if(hitTank(tanks.get(i))){
+                return  true;
+            }
+        }
+        return  false;
     }
 }

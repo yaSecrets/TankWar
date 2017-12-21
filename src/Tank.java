@@ -60,7 +60,12 @@ public class Tank {
     }
 
     public void draw(Graphics g){
-        if(!live) return;
+        if(!live) {
+            if (!good){
+                tc.tanks.remove(this);
+            }
+            return;
+        }
         //窗口重画时会自动调用paint方法
         //获取前景色
         Color c = g.getColor();
