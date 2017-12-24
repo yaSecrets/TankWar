@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5ad00b6-09ac-439f-b35d-5ed31779af6d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Wall.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/Tank$1.class" afterPath="$PROJECT_DIR$/out/production/TankWar/Tank$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/Tank$Direction.class" afterPath="$PROJECT_DIR$/out/production/TankWar/Tank$Direction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/Tank.class" afterPath="$PROJECT_DIR$/out/production/TankWar/Tank.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/TankClient$1.class" afterPath="$PROJECT_DIR$/out/production/TankWar/TankClient$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/TankClient$PaintThread.class" afterPath="$PROJECT_DIR$/out/production/TankWar/TankClient$PaintThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/TankClient$keyMonitor.class" afterPath="$PROJECT_DIR$/out/production/TankWar/TankClient$keyMonitor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TankWar/TankClient.class" afterPath="$PROJECT_DIR$/out/production/TankWar/TankClient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Missile.java" afterPath="$PROJECT_DIR$/src/Missile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tank.java" afterPath="$PROJECT_DIR$/src/Tank.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TankClient.java" afterPath="$PROJECT_DIR$/src/TankClient.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,7 +21,7 @@
       <file leaf-file-name="TankClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TankClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1317">
+            <state relative-caret-position="-1303">
               <caret line="59" column="39" lean-forward="false" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -64,8 +53,8 @@
       <file leaf-file-name="Tank.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Tank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="262" column="36" lean-forward="false" selection-start-line="262" selection-start-column="36" selection-end-line="262" selection-end-column="36" />
+            <state relative-caret-position="300">
+              <caret line="292" column="25" lean-forward="false" selection-start-line="292" selection-start-column="25" selection-end-line="292" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -129,8 +118,8 @@
         <option value="$PROJECT_DIR$/src/Explode.java" />
         <option value="$PROJECT_DIR$/src/Wall.java" />
         <option value="$PROJECT_DIR$/src/Missile.java" />
-        <option value="$PROJECT_DIR$/src/Tank.java" />
         <option value="$PROJECT_DIR$/src/TankClient.java" />
+        <option value="$PROJECT_DIR$/src/Tank.java" />
       </list>
     </option>
   </component>
@@ -675,15 +664,15 @@
       <workItem from="1513687110324" duration="3606000" />
       <workItem from="1513859222604" duration="3257000" />
       <workItem from="1514018557092" duration="3512000" />
-      <workItem from="1514097952413" duration="6747000" />
+      <workItem from="1514097952413" duration="7617000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49432000" />
+    <option name="totallyTimeSpent" value="50302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1199,8 +1188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Tank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="262" column="36" lean-forward="false" selection-start-line="262" selection-start-column="36" selection-end-line="262" selection-end-column="36" />
+        <state relative-caret-position="300">
+          <caret line="292" column="25" lean-forward="false" selection-start-line="292" selection-start-column="25" selection-end-line="292" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1209,7 +1198,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TankClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1317">
+        <state relative-caret-position="-1303">
           <caret line="59" column="39" lean-forward="false" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />

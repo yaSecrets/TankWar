@@ -161,6 +161,9 @@ public class Tank {
             case KeyEvent.VK_DOWN:
                 bD = false;
                 break;
+            case KeyEvent.VK_A:
+                superFire();
+                break;
         }
         locateDirection();
     }
@@ -272,5 +275,22 @@ public class Tank {
             }
         }
         return false;
+    }
+    //往指定方向打一发炮弹
+    public Missile fire(Direction dir){
+        if(!live) return null;
+        int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
+        int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
+        Missile m = new Missile(x,y,good,dir,this.tc);
+        tc.missiles.add(m);
+        return m;
+    }
+    //设置超级子弹打击方式
+    public void superFire(){
+        Direction[] dirs = Direction.values();
+        for(int i = 0;i < 8;i++){
+            /*tc.missiles.add(fire(dirs[i]));*/
+            fire(dirs[i]);
+        }
     }
 }
