@@ -28,13 +28,23 @@ public class Tank {
     //炮筒方向
     private Direction ptDir = Direction.D;
 
-
     //区分tank好坏
     private boolean good;
     //定义坦克的生存状态
     private boolean live = true;
 
+    //设置坦克的生命值
+    private int life = 100;
+    private BloodBar bb = new BloodBar();
     private int step = r.nextInt(12) + 3;
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
 
     public boolean isGood() {
         return good;
@@ -92,6 +102,8 @@ public class Tank {
         g.fillOval(x,y,WIDTH,HEIGHT);
         //设回
         g.setColor(c);
+        //画血条
+        if(good) bb.draw(g);
         //画炮弹
         switch (ptDir) {
             case L:
@@ -291,6 +303,17 @@ public class Tank {
         for(int i = 0;i < 8;i++){
             /*tc.missiles.add(fire(dirs[i]));*/
             fire(dirs[i]);
+        }
+    }
+
+    private class BloodBar {
+        public void draw(Graphics g){
+            Color c = g.getColor();
+            g.setColor(Color.RED);
+            g.drawRect(x,y-10,WIDTH,10);
+            int w = WIDTH * life/100;
+            g.fillRect(x,y-10,w,10);
+            g.setColor(c);
         }
     }
 }
