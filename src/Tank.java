@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
-
+import java.util.Random;
+import java.util.List;
 /**建立Tank类
  * 为Tank类添加成员变量x，y
  * 添加draw方法
@@ -14,7 +15,11 @@ public class Tank {
     public static final int WIDTH = 30;//tank宽度
     public static final int HEIGHT = 30;//tank高度
     private int x,y;
+    //记录上一步tank的位置
+    private int oldX,oldY;
     private boolean bL = false,bU = false,bR = false,bD = false;
+
+    private static Random r = new Random();
 
     TankClient tc;
     enum Direction {L,R,U,D,LU,LD,RU,RD,STOP};
@@ -22,10 +27,19 @@ public class Tank {
     private Direction dir = Direction.STOP;
     //炮筒方向
     private Direction ptDir = Direction.D;
+
+
     //区分tank好坏
     private boolean good;
     //定义坦克的生存状态
     private boolean live = true;
+
+    private int step = r.nextInt(12) + 3;
+
+    public boolean isGood() {
+        return good;
+    }
+
     public boolean isLive() {
         return live;
     }
@@ -37,11 +51,14 @@ public class Tank {
     public Tank(int x, int y,boolean good) {
         this.x = x;
         this.y = y;
+        this.oldX = x;
+        this.oldY = y;
         this.good = good;
     }
-    public Tank(int x,int y,boolean good,TankClient tc){
+    public Tank(int x,int y,boolean good,Direction dir,TankClient tc){
         this(x,y,good);
         this.tc = tc;
+        this.dir = dir;
     }
     public int getX() {
         return x;
@@ -149,6 +166,8 @@ public class Tank {
     }
     //移动方向
     void move(){
+        this.oldX = x;
+        this.oldY = y;
         switch (dir){
             case L:
                 x -= XSPEED;
@@ -189,6 +208,19 @@ public class Tank {
         if(y < 30) y = 30;
         if(x+Tank.WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
         if(y+Tank.HEIGHT > TankClient.GMME_HEIGHT) y = TankClient.GMME_HEIGHT - Tank.HEIGHT;
+
+        if(!good){
+            Direction[] dirs = Direction.values();
+            if(step == 0){
+                step = r.nextInt(12) + 3;
+                int rn = r.nextInt(dirs.length);
+                dir = dirs[rn];
+            }
+            step--;
+            if(r.nextInt(40) > 38){
+                this.fire();
+            }
+        }
     }
     //定位方向
     void locateDirection(){
@@ -204,13 +236,41 @@ public class Tank {
     }
 
     public Missile fire(){
+        if(!live) return null;
         int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
-        Missile m = new Missile(x,y,ptDir,this.tc);
+        Missile m = new Missile(x,y,good,ptDir,this.tc);
         tc.missiles.add(m);
         return m;
     }
     public Rectangle getRect(){
         return new Rectangle(x,y,WIDTH,HEIGHT);
+    }
+
+    public void stay(){
+        x = oldX;
+        y = oldY;
+    }
+    //坦克撞墙
+    public boolean  collidesWithWall(Wall w){
+        if(this.live && this.getRect().intersects(w.getRect())){
+            this.stay();
+            return true;
+        }
+        return false;
+    }
+    //
+    public boolean cpllidesWithTanks(List<Tank> tanks){
+        for(int i = 0;i < tanks.size();i++){
+            Tank t = tanks.get(i);
+            if (this != t){
+                if(this.live && t.isLive() && this.getRect().intersects(t.getRect())){
+                    this.stay();
+                    t.stay();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

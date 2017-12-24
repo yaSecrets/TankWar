@@ -18,7 +18,10 @@ public class TankClient extends Frame{
     //背后虚拟图片，用来解决双缓冲问题
     Image offScreenImage = null;
     //Tank实体类
-    Tank myTank = new Tank(50,50,true,this);
+    Tank myTank = new Tank(50,50,true,Tank.Direction.STOP,this);
+    //定义两堵墙
+    Wall w1 = new Wall(100,200,20,150,this);
+    Wall w2 = new Wall(300,100,300,20,this);
     /*Tank enemyTank = new Tank(100,100,false,this);*/
     //爆照集合
     List<Explode> explodes = new ArrayList<>();
@@ -39,6 +42,9 @@ public class TankClient extends Frame{
             /*if(!m.isLive()) missiles.remove(m);*/
             /*m.hitTank(enemyTank);*/
             m.hitTanks(tanks);
+            m.hitTank(myTank);
+            m.hitWall(w1);
+            m.hitWall(w2);
             m.draw(g);
         }
         // 画爆照效果
@@ -49,15 +55,20 @@ public class TankClient extends Frame{
         //画坦克
         for (int i = 0;i < tanks.size();i++){
             Tank t = tanks.get(i);
+            t.collidesWithWall(w1);
+            t.collidesWithWall(w2);
+            t.cpllidesWithTanks(tanks);
             t.draw(g);
         }
         myTank.draw(g);
         /*enemyTank.draw(g);*/
+        w1.draw(g);
+        w2.draw(g);
     }
 
     public void lauchFrame(){
         for (int i = 0;i < 10;i++){
-            tanks.add(new Tank(50+40*(i+1),50,false,this));
+            tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
         }
         //设置位置
         this.setLocation(200,100);

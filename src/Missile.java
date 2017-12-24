@@ -12,6 +12,8 @@ public class Missile {
     //子弹的位置
     int x,y;
     Tank.Direction dir;
+    //子弹也有好坏之分，自己人是不能打自己人的
+    private boolean good;
 
     //子弹是否存在
     private boolean live = true;
@@ -22,8 +24,9 @@ public class Missile {
         this.y = y;
         this.dir = dir;
     }
-    public Missile(int x,int y,Tank.Direction dir,TankClient tc){
+    public Missile(int x,int y,boolean good,Tank.Direction dir,TankClient tc){
         this(x,y,dir);
+        this.good = good;
         this.tc = tc;
     }
     public int getX() {
@@ -112,7 +115,7 @@ public class Missile {
     }
     //打中一辆坦克
     public boolean hitTank(Tank t){
-        if(this.getRect().intersects(t.getRect()) && t.isLive()){
+        if(this.live && this.getRect().intersects(t.getRect()) && t.isLive()&&this.good != t.isGood() ){
             t.setLive(false);
             this.live = false;
             Explode  e = new Explode(x,y,tc);
@@ -129,5 +132,13 @@ public class Missile {
             }
         }
         return  false;
+    }
+    //子弹不能穿墙
+    public boolean hitWall(Wall w){
+        if(this.live && this.getRect().intersects(w.getRect())){
+            this.live = false;
+            return true;
+        }
+        return false;
     }
 }
