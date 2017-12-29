@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by midng on 2017/12/10.
+ * 这个类的作用是坦克游戏的主窗口
  */
 public class TankClient extends Frame{
     //以后需要多处改变的量可以定义为常量
@@ -29,13 +29,21 @@ public class TankClient extends Frame{
     /* Missile m = null;*/
     List<Missile> missiles = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
+
+    Blood b = new Blood();
     @Override
     public void paint(Graphics g) {
-        //画字符串
+        //指明子弹、爆炸、坦克数量、坦克生命值
         g.drawString("missile count:" + missiles.size(),10,50);
         g.drawString("explode count:" + explodes.size(),10,70);
         g.drawString("tanks count:" + tanks.size(),10,90);
         g.drawString("tanks life:" + myTank.getLife(),10,110);
+
+        if(tanks.size() == 0){
+            for (int i = 0;i < 5;i++){
+                tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
+            }
+        }
         /*if(m != null) m.draw(g);*/
         //画子弹
         for (int i = 0;i < missiles.size();i++){
@@ -62,11 +70,17 @@ public class TankClient extends Frame{
             t.draw(g);
         }
         myTank.draw(g);
+        //吃血块满血
+        myTank.eat(b);
         /*enemyTank.draw(g);*/
         w1.draw(g);
         w2.draw(g);
+        b.draw(g);
     }
 
+    /**
+     * 本方法显示坦克主窗口
+     */
     public void lauchFrame(){
         for (int i = 0;i < 10;i++){
             tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));

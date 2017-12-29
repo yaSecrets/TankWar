@@ -161,6 +161,12 @@ public class Tank {
                 /*tc.missiles.add(fire());*/
                 fire();
                 break;
+            case KeyEvent.VK_F2:
+                if(!this.live){
+                    this.live = true;
+                    this.life = 100;
+                }
+                break;
             case KeyEvent.VK_LEFT:
                 bL = false;
                 break;
@@ -266,7 +272,12 @@ public class Tank {
         x = oldX;
         y = oldY;
     }
-    //坦克撞墙
+
+    /**
+     *
+     * @param w 被撞的墙
+     * @return 撞上了返回true，否则false
+     */
     public boolean  collidesWithWall(Wall w){
         if(this.live && this.getRect().intersects(w.getRect())){
             this.stay();
@@ -315,5 +326,15 @@ public class Tank {
             g.fillRect(x,y-10,w,10);
             g.setColor(c);
         }
+    }
+
+    public boolean eat(Blood b){
+        if(this.live && b.isLive() && this.getRect().intersects(b.getRect())){
+            //吃血块
+            this.life = 100;
+            b.setLive(false);
+            return true;
+        }
+        return false;
     }
 }
